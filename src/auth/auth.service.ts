@@ -1,38 +1,29 @@
-import { Injectable, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
-import { JwtService } from '@nestjs/jwt';
+import { Injectable } from '@nestjs/common';
+import { LoginDto } from './dto/login.dto';
+import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Injectable()
 export class AuthService {
+  signin(email: string, password: string) {
+    throw new Error('Method not implemented.');
+  }
+  create(LoginDto: LoginDto) {
+    return 'This action adds a new auth';
+  }
 
-  private readonly logger = new Logger(AuthService.name);
+  findAll() {
+    return `This action returns all auth`;
+  }
 
+  findOne(id: number) {
+    return `This action returns a #${id} auth`;
+  }
 
-    constructor(private usersService: UsersService,
-      private jwtService: JwtService) {}
+  update(id: number, updateAuthDto: UpdateAuthDto) {
+    return `This action updates a #${id} auth`;
+  }
 
-    async signIn(email: string, pass: string): Promise<{ access_token: string, expiresIn: string | undefined }> {
-        const user = await this.usersService.findUserByEmail(email);
-
-        if(!user){
-          throw new NotFoundException(`User is not found.`);
-
-      }
-
-        if (user?.password !== pass) {
-          throw new UnauthorizedException();
-        }
-
-        const payload = {email: user.email,_id:user._id};
-        return {
-          access_token: await this.jwtService.signAsync(payload),
-          expiresIn:"3600",
-        };
-
-        // const { password, ...result } = user;
-        // TODO: Generate a JWT and return it here
-        // instead of the user object
-        // return result;
-      }
-
+  remove(id: number) {
+    return `This action removes a #${id} auth`;
+  }
 }
