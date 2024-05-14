@@ -15,7 +15,7 @@ description?:string;
 author:string;
 
 @Prop({ required: true })
-pages:Number;
+pages:number;
 
 }
 

@@ -46,7 +46,7 @@ export class BooksController {
   }
 
   @Delete(':id')
-  @ApiResponse({ status: 204, description: 'Book is deleted.'})
+  @ApiResponse({ status: 200, description: 'Book is deleted.'})
   @ApiParam({ name: 'id', description: 'book ID'})
   remove(@Param('id') id: string) {
     this.logger.log(`Deleting book by id`);

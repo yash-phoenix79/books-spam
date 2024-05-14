@@ -1,6 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateBookDto } from './create-book.dto';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
 
 export class UpdateBookDto extends PartialType(CreateBookDto) {
     @ApiProperty({ 
@@ -8,6 +9,9 @@ export class UpdateBookDto extends PartialType(CreateBookDto) {
         required: true,
         description: 'The title of your book',
     })
+    @IsString()
+    @IsNotEmpty()
+    @MaxLength(256)
     title:string;
 
     @ApiProperty({ 
@@ -15,6 +19,7 @@ export class UpdateBookDto extends PartialType(CreateBookDto) {
         required: false,
         description: 'Add new description and content',
     })
+    @IsString()
     description?:string;
 
     @ApiProperty({ 
@@ -22,9 +27,13 @@ export class UpdateBookDto extends PartialType(CreateBookDto) {
         required: true,
         description: 'Whats the name of author',
     })
+    @IsString()
     author: string;
 
     @ApiProperty()
-    pages: Number;
+    @IsNumber()
+    @IsNotEmpty()
+    @MaxLength(2000)
+    pages: number;
 
 }

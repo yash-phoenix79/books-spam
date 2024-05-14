@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsNumber, IsString, Max, MaxLength } from "class-validator";
 
 export class CreateBookDto {
 
@@ -8,6 +9,9 @@ export class CreateBookDto {
         required: true,
         description: 'The title of your book',
     })
+    @IsString()
+    @IsNotEmpty()
+    @MaxLength(256)
     title:string;
 
     @ApiProperty({ 
@@ -15,6 +19,7 @@ export class CreateBookDto {
         required: false,
         description: 'Give me some description',
     })
+    @IsString()
     description?:string;
 
     @ApiProperty({ 
@@ -22,9 +27,17 @@ export class CreateBookDto {
         required: true,
         description: 'Whats the name of author',
     })
+    @IsString()
     author: string;
 
-    @ApiProperty()
-    pages: Number;
+    @ApiProperty({
+        type:Number,
+        required: true,
+        description: 'How many pages are in the book',
+    })
+    @IsNumber()
+    @IsNotEmpty()
+    @Max(2000)
+    pages: number;
 
 }
