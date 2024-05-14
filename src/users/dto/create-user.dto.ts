@@ -12,6 +12,8 @@ export class CreateUserDto {
     @IsNotEmpty({ message: 'Email is required' })
     email:string;
 
+    
+
     @ApiProperty({
         required: false,
         default:false,

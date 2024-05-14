@@ -31,7 +31,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-    await app.listen(3000, '0.0.0.0');
+    await app.listen(3001, '0.0.0.0');
 
     if (module.hot) {
       module.hot.accept();
